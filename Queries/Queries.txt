@@ -1,0 +1,32 @@
+1)select itemName,price,discountFlag from item  where categoryId=20001;
+
+
+2)
+select itemName,description from item WHERE 
+(itemName LIKE '%' +  'lip' + '%'  OR description LIKE '%' + 'long' + '%')
+
+
+3.1)SELECT o.CustomerId,SUM(io.Quantity)  [Items Quatity], o.TotalAmount AS OrderTotal 
+FROM [Order] AS o
+JOIN OrderItem AS  io ON o.OrderId = io.OrderId
+WHERE o.CustomerId = 4
+group by CustomerId, o.TotalAmount 
+
+3.2)
+SELECT  i.itemName, io.Quantity, io.ItemPrice , io.DiscountAmount, io.Rate,  io.Subtota AS OrderTotal 
+FROM [Order] AS o
+JOIN OrderItem AS  io ON o.OrderId = io.OrderId
+JOIN Item As i ON io.ItemId = i.id
+WHERE o.CustomerId = 3
+
+
+4)SELECT 
+    i.itemName,
+    SUM(io.Quantity) AS TotalQuantitySold
+FROM OrderItem As io
+JOIN Item As i ON io.ItemId = i.id
+GROUP BY i.itemName
+ORDER BY TotalQuantitySold DESC; 
+
+
+
